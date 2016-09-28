@@ -23,6 +23,12 @@ class FirstmodelsController < ApplicationController
         marker.lat result.location.coordinate.latitude
         marker.lng result.location.coordinate.longitude
         marker.infowindow "#{result.name} phone: #{result.phone}"
+        # marker.picture({
+        #   "url" => result.snippet_image_url,
+        #   "width" => 100,
+        #   "height" => 100
+        #   })
+        marker.json({ title: result.name })
       end
       @firstmodels = Firstmodel.all
       flash[:notice] = "Firstmodel saved successfully"
