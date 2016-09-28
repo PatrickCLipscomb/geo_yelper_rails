@@ -26,9 +26,7 @@
 <% if @yelp_results %>
 <h3>Results:</h3>
 <% @yelp_results.each do |yelp_result| %>
-<% arry_length = yelp_result.id.split("-").length %>
-<% name = yelp_result.id.split("-").map(&:capitalize).slice(0, arry_length-1).join(" ") %>
-<h3><%= name %></h3>
+<h3><%= yelp_result.name %></h3>
 <h4><%= yelp_result.location.coordinate.latitude %>, <%= yelp_result.location.coordinate.longitude %></h4>
 <% end %>
 <% end %>

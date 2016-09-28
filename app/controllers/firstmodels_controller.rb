@@ -22,7 +22,7 @@ class FirstmodelsController < ApplicationController
       @hash = Gmaps4rails.build_markers(@yelp_results) do |result, marker|
         marker.lat result.location.coordinate.latitude
         marker.lng result.location.coordinate.longitude
-        marker.infowindow result.id.split("-").map(&:capitalize).join(" ")
+        marker.infowindow "#{result.name} phone: #{result.phone}"
       end
       @firstmodels = Firstmodel.all
       flash[:notice] = "Firstmodel saved successfully"
