@@ -6,4 +6,31 @@
   <% end %>
 </ul>
 <hr>
+
+
+
+<div style='width: 800px;'>
+  <div id="map" style='width: 800px; height: 400px;'></div>
+</div>
+<script type="text/javascript">
+  handler = Gmaps.build('Google');
+  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+  markers = handler.addMarkers(<%= raw @hash.to_json %>);
+  handler.bounds.extendWith(markers);
+  handler.fitMapToBounds();
+  });
+</script>
+
+
+
+<% if @yelp_results %>
+<h3>Results:</h3>
+<% @yelp_results.each do |yelp_result| %>
+<% arry_length = yelp_result.id.split("-").length %>
+<% name = yelp_result.id.split("-").map(&:capitalize).slice(0, arry_length-1).join(" ") %>
+<h3><%= name %></h3>
+<h4><%= yelp_result.location.coordinate.latitude %>, <%= yelp_result.location.coordinate.longitude %></h4>
+<% end %>
+<% end %>
+<hr>
 <%= link_to "Add a firstmodel", new_firstmodel_path, :class => "btn-lg"%>

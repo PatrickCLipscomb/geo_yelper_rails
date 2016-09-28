@@ -17,7 +17,11 @@ gem 'paperclip', '~> 4.1'
 gem 'remotipart', '~> 1.2'
 gem 'geocoder'
 gem 'gmaps4rails'
+gem 'underscore-rails'
 gem 'devise'
+gem 'rest-client'
+gem 'twitter'
+gem 'yelp', require: 'yelp'
 
 
 group :development, :test do
@@ -31,6 +35,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'simplecov', require: false
+  gem 'dotenv-rails'
 end
 
 group :development do

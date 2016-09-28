@@ -14,8 +14,19 @@ class FirstmodelsController < ApplicationController
   def create
     @firstmodel = Firstmodel.create(firstmodel_params)
     if @firstmodel
+      results = @firstmodel.search_yelp(@firstmodel.name)
+      @yelp_results = []
+      results.businesses.each do |result|
+        @yelp_results.push(result)
+      end
+      @hash = Gmaps4rails.build_markers(@yelp_results) do |result, marker|
+        marker.lat result.location.coordinate.latitude
+        marker.lng result.location.coordinate.longitude
+        marker.infowindow result.id.split("-").map(&:capitalize).join(" ")
+      end
+      @firstmodels = Firstmodel.all
       flash[:notice] = "Firstmodel saved successfully"
-      redirect_to firstmodels_path
+      render :index
     else
       flash[:alert] = "Firstmodel failed to save"
       render :new
